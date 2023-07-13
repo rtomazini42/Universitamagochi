@@ -1,0 +1,20 @@
+#cenarioImg {
+    width: 40rem;
+    height: 40rem;
+
+}
+
+
+#charImg{
+    width: 40rem;
+    height: 40rem;
+    position: fixed;
+    position: absolute;
+    margin-top: 6rem;
+    margin-left: -20rem;
+
+}
+
+#status{
+    text-align: left;
+}
