@@ -548,11 +548,13 @@ function Dormir(meuPersonagem) {
   meuPersonagem.saude += saudeAlterada;
   meuPersonagem.energia += energiaAlterada;
   meuPersonagem.animo += animoAlterado;
+  meuPersonagem.fome  += -20;
 
   // Exibir os atributos atualizados no HTML
   $('#valorSaude').text(meuPersonagem.saude);
   $('#valorEnergia').text(meuPersonagem.energia);
   $('#valorAnimo').text(meuPersonagem.animo);
+  $('#valorFome').text(meuPersonagem.fome);
 
   // Exibir a opção de sono selecionada no console
   console.log(sono);
