@@ -19,6 +19,10 @@
     ['Pastel', 8, 10,-15],
     ['Churrasco', 18, 25,-5],
     ['Arroz e Feijão', 10, 10,0],
+    ['Parmegiana', 15, 10,-3],
+    ['Sanduiche promocional Subway', 12, 13,3],
+    ['Abacaxi', 10, 3,10],
+    ['Maça', 8, 2,5]
     ];
 
     const bebidas = [
@@ -26,8 +30,15 @@
         ['Agua', 0,2,5],
         ['Suco natural', 5,8,0],
         ['Café', 5,10,-5],
-        ['Suco de caixa', 1,1,-15],
+        ['Suco de caixa', 1,1,-8],
         ['Água de bica', 1,0,-15],
+        ['Agua de coco', 5, 3, 6],
+        ['Chá de Mate', 3, 5, 5],
+        ['Chá de hortelã', 3, 5, 5],
+        ['Chá de Canela', 3, 5, 5],
+        ['Chá de Morango', 5, 5, 5],
+        ['Chá de Camomila', 5, 5, 5],
+        ['Guaraná do amazonas', 15, 5, 2],
         ['Corote', -5, 10, -20]
 
     ]
@@ -39,16 +50,24 @@
 
     }
     function testarSaude(meuPersonagem) {
+
+  if(meuPersonagem.saude < -100){
+    gameOver(meuPersonagem);
+  }
   if (meuPersonagem.saude < 0) {
-    meuPersonagem.saude += 50;
+    meuPersonagem.saude += 70;
     meuPersonagem.dinheiro += -50;
     meuPersonagem.animo += -20;
-    return "Para recuperar saúde foi necessário gastar 50 de dinheiro e 20 de ânimo.";
+    return "Para recuperar saúde foi necessário gastar 50 de dinheiro e 20 de ânimo. Se chegar menos de -100 durante a virada de dia você perde";
   }
   return null;
 }
 
 function testarAnimo(meuPersonagem) {
+  if (meuPersonagem.fome < -100) {
+    gameOver(meuPersonagem);
+    return;
+  }
   if (meuPersonagem.animo < 0) {
     meuPersonagem.energia -= 30;
     meuPersonagem.animo += 30;
@@ -59,10 +78,15 @@ function testarAnimo(meuPersonagem) {
 }
 
 function testarFome(meuPersonagem) {
+  if (meuPersonagem.fome < -100) {
+    gameOver(meuPersonagem);
+    return;
+  }
   if (meuPersonagem.fome < 0) {
     meuPersonagem.fome += 10;
     meuPersonagem.animo -= 10;
-    return "Impossível fazer tarefas faminto. Você come uma lagartixa frita, mas trate de se recuperar.";
+    meuPersonagem.saude -= 10;
+    return "Impossível fazer tarefas faminto. Você come uma lagartixa frita, mas trate de se recuperar. Se chegar menos de -100 durante a virada de dia você perde";
   }
   return null;
 }
@@ -70,9 +94,15 @@ function testarFome(meuPersonagem) {
 function testarEnergia(meuPersonagem) {
   if (meuPersonagem.energia < 0) {
     meuPersonagem.animo -= 10;
-    meuPersonagem.energia += 25;
+    meuPersonagem.energia += 15;
     meuPersonagem.fome -= 5;
-    return "Você está exausto, por favor, descanse. Para passar este dia você dormiu 12 horas ";
+    passarHora();
+    passarHora();
+    passarHora();
+    passarHora();
+    passarHora();
+    passarHora();
+    return "Você está exausto, por favor, descanse. Para passar este dia você dormiu mais 6 horas ";
   }
   return null;
 }
@@ -86,11 +116,63 @@ function testarLimpeza(meuPersonagem) {
   return null;
 }
 
+function testarCurso(meuPersonagem){
+  if (meuPersonagem.porctCurso >100){
+    $('#contenudo').empty();
+    let mensagemSucesso = '<h1>Parabéns, você concluiu o curso!</h1>' +
+  '<h2>Nome do universitário: ' + meuPersonagem.nome + '</h2>' +
+  '<p>Status ao concluir o curso:</p>' +
+  '<ul>' +
+  '<li>Saúde: ' + meuPersonagem.saude + '</li>' +
+  '<li>Ânimo: ' + meuPersonagem.animo + '</li>' +
+  '<li>Fome: ' + meuPersonagem.fome + '</li>' +
+  '<li>Energia: ' + meuPersonagem.energia + '</li>' +
+  '<li>Limpeza: ' + meuPersonagem.limpeza + '</li>' +
+  '<li>Dinheiro: ' + meuPersonagem.dinheiro + '</li>' +
+  '</ul>' +
+  '<p>Dias sobrevividos: ' + diaMundo + '</p>' +
+  '<p>Porcentagem do curso concluído: ' + meuPersonagem.porctCurso + '%</p>' +
+  '<br>' +
+  '<button class="btn btn-primary" onclick="compartilharTwitter(meuPersonagem, diaMundo)">Compartilhar resultados no Twitter</button>' +
+  '<button class="btn btn-primary" onclick="compartilharMastodon(meuPersonagem, diaMundo)">Compartilhar resultados no Mastodon</button>' +
+  '<p>O ' + meuPersonagem.nome + ' adquiriu no curso:</p>';
+
+// Verificar os status abaixo de 0
+mensagemSucesso += '<p>✅ Diploma</p>';
+if (meuPersonagem.saude < 0) {
+  mensagemSucesso += '<p>✅ Doenças</p>';
+}
+if (meuPersonagem.animo < 0) {
+  mensagemSucesso += '<p>✅ Depressão</p>';
+}
+if (meuPersonagem.fome < 0) {
+  mensagemSucesso += '<p>✅ Fome</p>';
+}
+if (meuPersonagem.energia < 0) {
+  mensagemSucesso += '<p>✅ Burnout</p>';
+}
+if (meuPersonagem.limpeza < 0) {
+  mensagemSucesso += '<p>✅ Sujeira</p>';
+}
+if (meuPersonagem.dinheiro < 0) {
+  mensagemSucesso += '<p>✅ Dívidas</p>';
+}
+
+// Adicionar a mensagem à div "contenudo"
+$('#contenudo').html(mensagemSucesso);
+
+
+  }
+}
+
 function testarDinheiro(meuPersonagem) {
   if (meuPersonagem.dinheiro < 0) {
     diasNegativo += 1;
     testarDiasNegativo(diasNegativo);
     return "Não passe mais de 5 dias no cheque especial... senão.";
+  }
+  if (diasNegativo> 5){
+    gameOver(meuPersonagem);
   }
   diasNegativo = 0;
   return null;
@@ -101,6 +183,59 @@ function testarDiasNegativo(diasNegativo){
         alert("Game over");
   }
   return null;
+}
+
+function gameOver(meuPersonagem){
+
+      // Esvaziar a div "comunicados"
+      $('#contenudo').empty();
+
+
+      
+      let mensagemGameOver = '<h1>Seu universitário foi embora</h1>' +
+      '<h2>Nome do universitário: ' + meuPersonagem.nome + '</h2>' +
+      '<p>Status quando ele partiu:</p>' +
+      '<ul>' +
+      '<li>Saúde: ' + meuPersonagem.saude + '</li>' +
+      '<li>Ânimo: ' + meuPersonagem.animo + '</li>' +
+      '<li>Fome: ' + meuPersonagem.fome + '</li>' +
+      '<li>Energia: ' + meuPersonagem.energia + '</li>' +
+      '<li>Limpeza: ' + meuPersonagem.limpeza + '</li>' +
+      '<li>Dinheiro: ' + meuPersonagem.dinheiro + '</li>' +
+      '</ul>' +
+      '<p>Dias sobrevividos: ' + diaMundo+ '</p>' +
+      '<p>Porcentagem do curso concluído: ' + meuPersonagem.porctCurso + '%</p>' +
+      '<br>' +
+      '<button class="btn btn-primary" onclick="compartilharTwitter(meuPersonagem, diaMundo)">Compartilhar resultados no Twitter</button>' +
+      '<button class="btn btn-primary" onclick="compartilharMastodon(meuPersonagem, diaMundo)">Compartilhar resultados no Mastodon</button>'+
+      '<p>O ' + meuPersonagem.nome + ' abandonou o curso por: </p>';
+    
+    // Verificar os status abaixo de 0
+    if (meuPersonagem.saude < 0) {
+      mensagemGameOver += '<p>✅ estava doente</p>';
+    }
+    if (meuPersonagem.animo < 0) {
+      mensagemGameOver += '<p>✅ estava depressivo</p>';
+    }
+    if (meuPersonagem.fome < 0) {
+      mensagemGameOver += '<p>✅ estava passando fome</p>';
+    }
+    if (meuPersonagem.energia < 0) {
+      mensagemGameOver += '<p>✅  estava exausto</p>';
+    }
+    if (meuPersonagem.limpeza < 0) {
+      mensagemGameOver += '<p>✅  estava sujo</p>';
+    }
+    if (meuPersonagem.dinheiro < 0) {
+      mensagemGameOver += '<p>✅  estava devendo no banco</p>';
+    }
+    
+    // Adicionar a mensagem à div "contenudo"
+    $('#contenudo').html(mensagemGameOver);
+    
+
+
+
 }
 
 $('#botaoEnviar').click(function() {
@@ -191,7 +326,7 @@ $('#botaoEnviar').click(function() {
     mostrarAlerta("Nada acontece. Clique para continuar o jogo.");
   }
   meuPersonagem.limpeza -= getRandomInt(5, 25);
-  $('#valorNomeBicho').text(meuPersonagem.nome);
+    $('#valorNomeBicho').text(meuPersonagem.nome);
     $('#valorSaude').text(meuPersonagem.saude);
     $('#valorAnimo').text(meuPersonagem.animo);
     $('#valorFome').text(meuPersonagem.fome);
@@ -202,6 +337,17 @@ $('#botaoEnviar').click(function() {
   $(document).one("click", function() {
       console.log('finalizado dia') // Resolva a promessa para indicar o fim da função
     });
+
+    $('#valorNomeBicho').text(meuPersonagem.nome);
+    $('#valorSaude').text(meuPersonagem.saude);
+    $('#valorAnimo').text(meuPersonagem.animo);
+    $('#valorFome').text(meuPersonagem.fome);
+    $('#valorEnergia').text(meuPersonagem.energia);
+    $('#valorLimpeza').text(meuPersonagem.limpeza);
+    $('#valorDinheiro').text(meuPersonagem.dinheiro);
+
+    testarCurso(meuPersonagem);
+
 }
 
 function mostrar(mensagem) {
@@ -249,7 +395,7 @@ function criar(){
     $('#horario').append('<p>Hora: <span id = "valorHora">12</span></p>');
     $('#porctCursoCompleto').append('<span>Porcentagem do curso feito:</span><progress value="'+meuPersonagem.porctCurso+'" max="100">'+meuPersonagem.porctCurso+'</progress>');
 
-    $('#cenario').append('<img id="cenarioImg" src="img/scene/BedRoom.png" class="mx-auto img-fluid">');
+    $('#cenario').append('<img id="cenarioImg" src="img/Scene/BedRoom.png" class="mx-auto img-fluid">');
     $('#ator').append('<img id="charImg" src="img/Char/Person.png">');
     $('#botoes').append('<div class="d-flex flex-column flex-sm-row flex-wrap align-items-sm-center justify-content-center">' +
         '<button class="btn btn-primary col-6 col-sm-2 mb-2" onclick="Comer(meuPersonagem)" onmouseenter="mostrar(\'O universitário vai comer alguma coisa, que vai provavelmente desgastar sua saúde, diminuir o dinheiro e talvez deixar com ansiedade\')">Comer</button>' +
@@ -285,6 +431,8 @@ console.log(meuPersonagem);
 
 
 function Comer(meuPersonagem) {
+  $('#cenarioImg').remove();
+  $('#cenario').append('<img id="cenarioImg" src="img/Scene/Kitchen.png" class="mx-auto img-fluid">');
   // Selecionar uma comida aleatória
   let indiceComida = Math.floor(Math.random() * comidas.length);
   let comida = comidas[indiceComida];
@@ -314,12 +462,15 @@ function Comer(meuPersonagem) {
 
 function Banho(meuPersonagem) {
   // Selecionar um tipo de banho aleatório
+  $('#cenarioImg').remove();
+  $('#cenario').append('<img id="cenarioImg" src="img/Scene/BedRoom.png" class="mx-auto img-fluid">');
   let indiceBanho = Math.floor(Math.random() * 5); // 5 opções diferentes de banho
   let tiposBanho = [
     { nome: 'Banho de Chuveiro', saudeRecuperada: 10, animoRecuperado: 5 },
     { nome: 'Banheira de Espuma', saudeRecuperada: 15, animoRecuperado: 10 },
     { nome: 'Banho de Aromaterapia', saudeRecuperada: 20, animoRecuperado: 15 },
     { nome: 'Banho de Cascata', saudeRecuperada: 25, animoRecuperado: 20 },
+    { nome: 'Banho de nervoso', saudeRecuperada: 35, animoRecuperado: 30 },
     { nome: 'Banho de Sauna', saudeRecuperada: 30, animoRecuperado: 25 }
   ];
   let banho = tiposBanho[indiceBanho];
@@ -342,7 +493,9 @@ function Banho(meuPersonagem) {
 }
 
 function Dormir(meuPersonagem) {
-  let opcoesSono = ['Soneca', 'Cochilo', 'Insônia'];
+  $('#cenarioImg').remove();
+  $('#cenario').append('<img id="cenarioImg" src="img/Scene/BedRoom.png" class="mx-auto img-fluid">');
+  let opcoesSono = ['Soneca', 'Cochilo', 'Sono pesado'];
   let indiceSono = Math.floor(Math.random() * opcoesSono.length);
   let sono = opcoesSono[indiceSono];
 
@@ -370,10 +523,11 @@ function Dormir(meuPersonagem) {
       passarHora();
       passarHora();
       break;
-    case 'Insônia':
-      saudeAlterada = -10;
-      energiaAlterada = -20;
-      animoAlterado = -10;
+    case 'Sono pesado':
+      saudeAlterada = +10;
+      energiaAlterada = +23;
+      animoAlterado = -5;
+      passarHora();
       passarHora();
       passarHora();
       passarHora();
@@ -403,6 +557,9 @@ function Dormir(meuPersonagem) {
 }
 
 function Estudar(meuPersonagem) {
+  $('#cenarioImg').remove();
+  $('#cenario').append('<img id="cenarioImg" src="img/Scene/ClassRoom.png" class="mx-auto img-fluid">');
+  //$('#ator').append('<img id="charImg" src="img/Char/Person.png">');
   let opcoesEstudo = [
     { nome: 'Consultar Professor', animoAlterado: 1, saudeAlterada: -5, fomeAlterada: -10, energiaAlterada: -15 },
     { nome: 'Ler Material', animoAlterado: 0, saudeAlterada: -5, fomeAlterada: -5, energiaAlterada: -10 },
@@ -425,7 +582,7 @@ function Estudar(meuPersonagem) {
   meuPersonagem.saude += estudo.saudeAlterada;
   meuPersonagem.fome += estudo.fomeAlterada;
   meuPersonagem.energia += estudo.energiaAlterada;
-  meuPersonagem.porctCurso += getRandomInt(0, 5);
+  meuPersonagem.porctCurso += getRandomInt(1, 3);
   if (estudo.dinheiroAlterado){
     meuPersonagem.dinheiro += -5;
   }
@@ -448,6 +605,20 @@ function Estudar(meuPersonagem) {
 }
 
 function Trabalhar(meuPersonagem) {
+  $('#cenarioImg').remove();
+
+  // Selecionar aleatoriamente a imagem do cenário
+  let imagensCenario = [
+    'img/Scene/Office.png',
+    'img/Scene/City.png',
+    'img/Scene/Park.png'
+  ];
+  let indiceCenario = Math.floor(Math.random() * imagensCenario.length);
+  let imagemCenario = imagensCenario[indiceCenario];
+
+  // Adicionar a nova imagem do cenário
+  $('#cenario').append('<img id="cenarioImg" src="' + imagemCenario + '" class="mx-auto img-fluid">');
+
   let opcoesTrabalho = [
     { nome: 'Entregador do Ifome', dinheiroGanho: 12, horasTrabalhadas: 1 },
     { nome: 'Ajudar seu zé com o computador', dinheiroGanho: 20, horasTrabalhadas: 1 },
@@ -512,5 +683,192 @@ function Trabalhar(meuPersonagem) {
   );
 }
 
+function Jogar(meuPersonagem){
+  $('#cenarioImg').remove();
+  $('#cenario').append('<img id="cenarioImg" src="img/Scene/Office.png" class="mx-auto img-fluid">');
+  let tiposJogo = [
+    {
+      nome: 'Indie bacana',
+      saudeAlterada: 10,
+      animoAlterado: 25,
+      fomeAlterada: -2,
+      energiaAlterada: 4,
+      limpezaAlterada: 1,
+      dinheiroGanho: -1
+    },
+    {
+      nome: 'Counter Strike',
+      saudeAlterada: -5,
+      animoAlterado: 12,
+      fomeAlterada: -3,
+      energiaAlterada: -3,
+      limpezaAlterada: -3,
+      dinheiroGanho: -2
+    },
+    {
+      nome: 'The sims',
+      saudeAlterada: 0,
+      animoAlterado: 3,
+      fomeAlterada: 3,
+      energiaAlterada: 3,
+      limpezaAlterada: 0,
+      dinheiroGanho: 0
+    },
+    {
+      nome: 'Yugioh MasterDuel',
+      saudeAlterada: 0,
+      animoAlterado: 30,
+      fomeAlterada: 1,
+      energiaAlterada: 3,
+      limpezaAlterada: 0,
+      dinheiroGanho: -4
+    },
+    {
+      nome: 'Tetris',
+      saudeAlterada: 5,
+      animoAlterado: 10,
+      fomeAlterada: 3,
+      energiaAlterada: 10,
+      limpezaAlterada: 5,
+      dinheiroGanho: 0
+    },
+    {
+      nome: 'Stardew Valley',
+      saudeAlterada: 5,
+      animoAlterado: 30,
+      fomeAlterada: 5,
+      energiaAlterada: 15,
+      limpezaAlterada: 5,
+      dinheiroGanho: 0
+    },
+    {
+      nome: 'Telethugs',
+      saudeAlterada: 5,
+      animoAlterado: 25,
+      fomeAlterada: 5,
+      energiaAlterada: 5,
+      limpezaAlterada: 0,
+      dinheiroGanho: 0
+    },
+    {
+      nome: 'Guitar hero',
+      saudeAlterada: 15,
+      animoAlterado: 30,
+      fomeAlterada: -10,
+      energiaAlterada: -10,
+      limpezaAlterada: -5,
+      dinheiroGanho: 0
+    },
+    {
+      nome: 'Disco Elysium',
+      saudeAlterada: -5,
+      animoAlterado: 50,
+      fomeAlterada: 5,
+      energiaAlterada: 15,
+      limpezaAlterada: 0,
+      dinheiroGanho: 0
+    },
+    {
+      nome: 'Emulador de PSONE',
+      saudeAlterada: 0,
+      animoAlterado: 30,
+      fomeAlterada: 0,
+      energiaAlterada: 30,
+      limpezaAlterada: 0,
+      dinheiroGanho: 0
+    },
+    {
+      nome: 'Emulador de GBA',
+      saudeAlterada: 0,
+      animoAlterado: 25,
+      fomeAlterada: 3,
+      energiaAlterada: 10,
+      limpezaAlterada: 0,
+      dinheiroGanho: 0
+    },
+    {
+      nome: 'Naruto Ninja Storm',
+      saudeAlterada:  0,
+      animoAlterado: 20,
+      fomeAlterada: 5,
+      energiaAlterada: 10,
+      limpezaAlterada: 0,
+      dinheiroGanho: 0
+    }
+
+  ];
+  let indiceJogo = Math.floor(Math.random() * tiposJogo.length);
+  let jogo = tiposJogo[indiceJogo];
+
+  // Atualizar os atributos do personagem com base no jogo sorteado
+  meuPersonagem.saude += jogo.saudeAlterada;
+  meuPersonagem.animo += jogo.animoAlterado;
+  meuPersonagem.fome += jogo.fomeAlterada;
+  meuPersonagem.energia += jogo.energiaAlterada;
+  meuPersonagem.limpeza += jogo.limpezaAlterada;
+  meuPersonagem.dinheiro += jogo.dinheiroGanho;
+
+  // Exibir as informações do jogo selecionado e atributos atualizados usando a função mostrar()
+  let mensagem = `Você jogou ${jogo.nome} e os atributos foram alterados.\n\n`;
+  mensagem += `Saúde: ${jogo.saudeAlterada}\n`;
+  mensagem += `Ânimo: ${jogo.animoAlterado}\n`;
+  mensagem += `Fome: ${jogo.fomeAlterada}\n`;
+  mensagem += `Energia: ${jogo.energiaAlterada}\n`;
+  mensagem += `Limpeza: ${jogo.limpezaAlterada}\n`;
+  mensagem += `Dinheiro: ${jogo.dinheiroGanho}\n`;
+  passarHora();
+  $('#valorDinheiro').text(meuPersonagem.dinheiro);
+  $('#valorAnimo').text(meuPersonagem.animo);
+  $('#valorSaude').text(meuPersonagem.saude);
+  $('#valorFome').text(meuPersonagem.fome);
+  $('#valorEnergia').text(meuPersonagem.energia);
 
 
+  $('#acao').text(mensagem);
+}
+
+
+
+
+  function compartilharTwitter(meuPersonagem, diaMundo) {
+    let tweetText = '';
+    tweetText += 'Joguei Universitamagochi #cuideDeUmBixo em https://rtomazini42.github.io/Universitamagochi/ '
+  
+    if (meuPersonagem.porctCurso > 100) {
+      tweetText += 'Meu Bixo se graduou em ' + diaMundo + ' dias :)';
+    } else {
+      tweetText += 'Meu Bixo largou a universidade em ' + diaMundo + ' dias, com ' + meuPersonagem.porctCurso + '% do curso completo :(';
+    }
+  
+    const tweetUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(tweetText);
+    
+    // Abrir a página do Twitter para compartilhar o tweet
+    window.open(tweetUrl);
+  }
+
+  function compartilharMastodon(meuPersonagem, diaMundo) {
+    // Obter a instância do usuário
+    const instancia = prompt('Insira a instância Mastodon (ex: mastodon.social), sem https:');
+  
+    if (!instancia) {
+      // Caso o usuário não tenha inserido a instância, retornar sem compartilhar
+      return;
+    }
+  
+    let mastodonText = '';
+    mastodonText += 'Joguei Universitamagochi #cuideDeUmBixo em https://rtomazini42.github.io/Universitamagochi/ ';
+  
+    if (meuPersonagem.porctCurso > 100) {
+      mastodonText += 'Meu Bixo se graduou em ' + diaMundo + ' dias :)';
+    } else {
+      mastodonText += 'Meu Bixo largou a universidade em ' + diaMundo + ' dias, com ' + meuPersonagem.porctCurso + '% do curso completo :(';
+    }
+  
+    const mastodonUrl = 'https://' + instancia + '/share?text=' + encodeURIComponent(mastodonText);
+  
+    // Abrir a página do Mastodon para compartilhar a mensagem
+    window.open(mastodonUrl);
+  }
+  
+  
+  
