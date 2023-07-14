@@ -4,31 +4,54 @@
 
 
         const comidas = [
-    ['Sanduíche', 10, 10,-5],
-    ['Pizza', 15, 20,-10],
-    ['Hambúrguer', 12, 15,-10],
-    ['Sorvete', 8, 12,-8],
-    ['Batata Frita', 10, 10,-10],
-    ['Macarrão', 12, 15,-5],
-    ['Salada', 5, 8,0],
-    ['Torta de Frango', 10, 12,-5],
-    ['Coxinha', 8, 10,-10],
-    ['Sushi', 10, 18,0],
-    ['Cachorro-Quente', 12, 10,-15],
-    ['Lasanha', 15, 18,-5],
-    ['Pastel', 8, 10,-15],
-    ['Churrasco', 18, 25,-5],
-    ['Arroz e Feijão', 10, 10,0],
-    ['Parmegiana', 15, 10,-3],
+    ['Sanduíche', 15, 10,-5],
+    ['Pizza', 20, 20,-10],
+    ['Hambúrguer', 18, 15,-10],
+    ['Sorvete', 12, 12,-8],
+    ['Batata Frita', 14, 10,-10],
+    ['Macarrão', 13, 15,-5],
+    ['Salada', 15, 8,0],
+    ['Torta de Frango', 15, 12,-5],
+    ['Coxinha', 12, 10,-10],
+    ['Sushi', 18, 18,0],
+    ['Cachorro-Quente', 18, 10,-15],
+    ['Lasanha', 25, 18,-5],
+    ['Pastel', 15, 10,-15],
+    ['Churrasco', 28, 25,-5],
+    ['Arroz e Feijão', 22, 10,0],
+    ['Parmegiana', 25, 10,-3],
     ['Sanduiche promocional Subway', 12, 13,3],
-    ['Abacaxi', 10, 3,10],
-    ['Maça', 8, 2,5]
+    ['Abacaxi', 20, 3,10],
+    ['Maça', 14, 2,5],
+    ['Miojo', 11, 1,-7],
+    ['Miojo', 11, 1,-7],
+    ['Miojo', 11, 1,-7],
+    ['Miojo', 11, 1,-7],
+	['Miojo', 11, 1,-7],
+	['Miojo', 11, 1,-7],
+    ['Cup Nodles', 14, 4,-11],
+    ['Cup Nodles', 14, 4,-11],
+    ['Cup Nodles', 14, 4,-11],
+    ['Restos da geladeira', 5, 0,-5],
+    ['Salada lovecraftiana', 10, 1,-3],
+    ['Salada de Cenoura', 14, 2,5],
+    ['Miojo com salsicha', 14, 5,-9],
+    ['Miojo com salsicha', 14, 5,-9],
+    ['Miojo com salsicha', 14, 5,-9],
+    ['Lanche promocional surpresa do ifome (esfiha vencida)', 30, 7,-15]
     ];
 
     const bebidas = [
         ['Refri', 1,5,-10],
+        ['Refri', 1,5,-10],
+		['Refri', 1,5,-10],
+        ['Agua', 0,2,5],
+        ['Agua', 0,2,5],
         ['Agua', 0,2,5],
         ['Suco natural', 5,8,0],
+        ['Café', 5,10,-5],
+        ['Café', 5,10,-5],
+        ['Café', 5,10,-5],
         ['Café', 5,10,-5],
         ['Suco de caixa', 1,1,-8],
         ['Água de bica', 1,0,-15],
@@ -39,6 +62,7 @@
         ['Chá de Morango', 5, 5, 5],
         ['Chá de Camomila', 5, 5, 5],
         ['Guaraná do amazonas', 15, 5, 2],
+        ['Vinho barato', 15, 5, -2],
         ['Corote', -5, 10, -20]
 
     ]
@@ -180,7 +204,7 @@ function testarDinheiro(meuPersonagem) {
 
 function testarDiasNegativo(diasNegativo){
     if (diasNegativo > 5) {
-        alert("Game over");
+        gameOver(meuPersonagem);
   }
   return null;
 }
@@ -283,7 +307,6 @@ $('#botaoEnviar').click(function() {
         $('#valorHora').empty();
         $('#valorHora').append(horaMundo);
 
-        valorDia
     }
 
 
@@ -384,6 +407,7 @@ function criar(){
     }
     
     meuPersonagem.nome = nomePersonagem;
+    guardarStatusAtual(meuPersonagem);
 
     // Esvaziar a div "comunicados"
     $('#inicio').empty();
@@ -398,12 +422,12 @@ function criar(){
     $('#cenario').append('<img id="cenarioImg" src="img/Scene/BedRoom.png" class="mx-auto img-fluid">');
     $('#ator').append('<img id="charImg" src="img/Char/Person.png">');
     $('#botoes').append('<div class="d-flex flex-column flex-sm-row flex-wrap align-items-sm-center justify-content-center">' +
-        '<button class="btn btn-primary col-6 col-sm-2 mb-2" onclick="Comer(meuPersonagem)" onmouseenter="mostrar(\'O universitário vai comer alguma coisa, que vai provavelmente desgastar sua saúde, diminuir o dinheiro e talvez deixar com ansiedade\')">Comer</button>' +
-        '<button class="btn btn-primary col-6 col-sm-2 mb-2" onclick="Banho(meuPersonagem)" onmouseenter="mostrar(\'O universitário vai tomar algum banho, dependendo do tipo iremos recuperar saúde, animo e limpeza\')">Banho</button>' +
-        '<button class="btn btn-primary col-6 col-sm-2 mb-2" onclick="Dormir(meuPersonagem)" onmouseenter="mostrar(\'Uma soneca, um cochilo, uma insônia, vamos ver o que nos aguarda. Afeta saúde, energia, animo e limpeza\')">Dormir</button>' +
-        '<button class="btn btn-primary col-6 col-sm-2 mb-2" onclick="Estudar(meuPersonagem)" onmouseenter="mostrar(\'Só assim você avança no game. Dependendo da sessão de estudo, você avança sua formação, ganha ou perde animo, perde energia, perde pontos de fome, saúde e limpeza\')">Estudar</button>' +
-        '<button class="btn btn-primary col-6 col-sm-2 mb-2" onclick="Trabalhar(meuPersonagem)" onmouseenter="mostrar(\'Uma das formas de ganhar dinheiro. Diminui animo, energia, saúde, limpeza e fome, aumenta grana, mas a que custo?\')">Trabalhar</button>' +
-        '<button class="btn btn-primary col-6 col-sm-2 mb-2" onclick="Jogar(meuPersonagem)" onmouseenter="mostrar(\'Aumenta animo, leve chance de aumentar energia e saúde\')">Jogar</button>'+
+        '<button class="btn btn-primary col-12 col-sm-6 col-md-2 mb-2" onclick="Comer(meuPersonagem)" onmouseenter="mostrar(\'O universitário vai comer alguma coisa, que vai provavelmente desgastar sua saúde, diminuir o dinheiro e talvez deixar com ansiedade\')">Comer</button>' +
+        '<button class="btn btn-primary col-12 col-sm-6 col-md-2 mb-2" onclick="Banho(meuPersonagem)" onmouseenter="mostrar(\'O universitário vai tomar algum banho, dependendo do tipo iremos recuperar saúde, animo e limpeza\')">Banho</button>' +
+        '<button class="btn btn-primary col-12 col-sm-6 col-md-2 mb-2" onclick="Dormir(meuPersonagem)" onmouseenter="mostrar(\'Uma soneca, um cochilo, uma insônia, vamos ver o que nos aguarda. Afeta saúde, energia, animo e limpeza\')">Dormir</button>' +
+        '<button class="btn btn-primary col-12 col-sm-6 col-md-2 mb-2" onclick="Estudar(meuPersonagem)" onmouseenter="mostrar(\'Só assim você avança no game. Dependendo da sessão de estudo, você avança sua formação, ganha ou perde animo, perde energia, perde pontos de fome, saúde e limpeza\')">Estudar</button>' +
+        '<button class="btn btn-primary col-12 col-sm-6 col-md-2 mb-2" onclick="Trabalhar(meuPersonagem)" onmouseenter="mostrar(\'Uma das formas de ganhar dinheiro. Diminui animo, energia, saúde, limpeza e fome, aumenta grana, mas a que custo?\')">Trabalhar</button>' +
+        '<button class="btn btn-primary col-12 col-sm-6 col-md-2 mb-2" onclick="Jogar(meuPersonagem)" onmouseenter="mostrar(\'Aumenta animo, leve chance de aumentar energia e saúde\')">Jogar</button>'+
     '</div>');
     $('#status').append(
     '<table class="table">' +
@@ -452,7 +476,7 @@ function Comer(meuPersonagem) {
   $('#valorSaude').text(meuPersonagem.saude);
   // Atualize os outros campos de status da mesma maneira
 
-   $('#acao').text(meuPersonagem.nome + ' comeu '+ comida[0] + ' e bebeu ' + bebida[0]);
+   $('#acao').text(meuPersonagem.nome + ' comeu '+ comida[0] + ' e bebeu ' + bebida[0] + '| Status alterados: ' + guardarStatusAtual(meuPersonagem));
 
   // Exibir a comida e bebida selecionadas no console
   //console.log(comida[0]);
@@ -497,7 +521,7 @@ $('#valorLimpeza').text(meuPersonagem.limpeza  );
   console.log(banho.nome);
   passarHora();
 
-  $('#acao').text(meuPersonagem.nome + ' tomou um banho de: ' + banho.nome + ' e está se sentindo mais limpo');
+  $('#acao').text(meuPersonagem.nome + ' tomou um banho de: ' + banho.nome + ' e está se sentindo mais limpo. O status:' + guardarStatusAtual(meuPersonagem));
 }
 
 function Dormir(meuPersonagem) {
@@ -563,7 +587,7 @@ function Dormir(meuPersonagem) {
   // Exibir a opção de sono selecionada no console
   console.log(sono);
 
-  $('#acao').text(meuPersonagem.nome + ' dormiu e teve um(a): ' + sono + ' - afetando saúde, energia e ânimo');
+  $('#acao').text(meuPersonagem.nome + ' dormiu e teve um(a): ' + sono + ' | ' + guardarStatusAtual(meuPersonagem));
 }
 
 function Estudar(meuPersonagem) {
@@ -571,12 +595,14 @@ function Estudar(meuPersonagem) {
   $('#cenario').append('<img id="cenarioImg" src="img/Scene/ClassRoom.png" class="mx-auto img-fluid">');
   //$('#ator').append('<img id="charImg" src="img/Char/Person.png">');
   let opcoesEstudo = [
-    { nome: 'Consultar Professor', animoAlterado: 1, saudeAlterada: -5, fomeAlterada: -10, energiaAlterada: -15 },
-    { nome: 'Ler Material', animoAlterado: 0, saudeAlterada: -5, fomeAlterada: -5, energiaAlterada: -10 },
-    { nome: 'Estudar em Conjunto', animoAlterado: 5, saudeAlterada: -5, fomeAlterada: -10, energiaAlterada: -10 },
-    { nome: 'Ir para Aula', animoAlterado: -5, saudeAlterada: -5, fomeAlterada: -10, energiaAlterada: -10, dinheiroAlterado: true, limpezaAlterada: -5 },
-    { nome: 'Video Aulas', animoAlterado: 0, saudeAlterada: -5, fomeAlterada: -5, energiaAlterada: -10 },
-    { nome: 'Estudar Bravamente', animoAlterado: 10, saudeAlterada: -10, fomeAlterada: -15, energiaAlterada: -15 }
+    { nome: 'Consultando Professor', animoAlterado: 1, saudeAlterada: -5, fomeAlterada: -10, energiaAlterada: -15 },
+    { nome: 'Lendo Material', animoAlterado: 0, saudeAlterada: -5, fomeAlterada: -5, energiaAlterada: -10 },
+    { nome: 'Estudando em Conjunto', animoAlterado: 5, saudeAlterada: -5, fomeAlterada: -10, energiaAlterada: -10 },
+    { nome: 'Foi para Aula', animoAlterado: -5, saudeAlterada: -5, fomeAlterada: -10, energiaAlterada: -10, dinheiroAlterado: true, limpezaAlterada: -5 },
+    { nome: 'Asistindo video Aulas', animoAlterado: 0, saudeAlterada: -5, fomeAlterada: -5, energiaAlterada: -10 },
+    { nome: 'Estudando Bravamente', animoAlterado: 10, saudeAlterada: -10, fomeAlterada: -15, energiaAlterada: -15 },
+    { nome: 'Matando aula para estudae', animoAlterado: 15, saudeAlterada: -3, fomeAlterada: -3, energiaAlterada: -5 }
+
   ];
   let indiceEstudo = Math.floor(Math.random() * opcoesEstudo.length);
   let estudo = opcoesEstudo[indiceEstudo];
@@ -611,7 +637,7 @@ function Estudar(meuPersonagem) {
   // Exibir o tipo de estudo selecionado no console
   console.log(estudo.nome);
 
-  $('#acao').text(meuPersonagem.nome + ' está estudando: ' + estudo.nome + ' - afetando ânimo, saúde, fome e energia');
+  $('#acao').text(meuPersonagem.nome + ' está estudando: ' + estudo.nome + ' - afetando: '+ guardarStatusAtual(meuPersonagem));
 }
 
 function Trabalhar(meuPersonagem) {
@@ -662,10 +688,10 @@ function Trabalhar(meuPersonagem) {
 
   // Atualizar os atributos do personagem com base no tipo de trabalho selecionado
   meuPersonagem.dinheiro += trabalho.dinheiroGanho;
-  meuPersonagem.animo -= getRandomInt(10, 30); // Diminui aleatoriamente o ânimo
-  meuPersonagem.saude -= getRandomInt(10, 30); // Diminui aleatoriamente a saúde
-  meuPersonagem.fome -= getRandomInt(10, 30); // Diminui aleatoriamente a fome
-  meuPersonagem.energia -= getRandomInt(10, 30); // Diminui aleatoriamente a energia
+  meuPersonagem.animo -= getRandomInt(5, 30); // Diminui aleatoriamente o ânimo
+  meuPersonagem.saude -= getRandomInt(5, 25); // Diminui aleatoriamente a saúde
+  meuPersonagem.fome -= getRandomInt(10, 25); // Diminui aleatoriamente a fome
+  meuPersonagem.energia -= getRandomInt(10, 35); // Diminui aleatoriamente a energia
 
   // Passar as horas de trabalho
   let horasTrabalhadas = trabalho.horasTrabalhadas;
@@ -681,7 +707,7 @@ function Trabalhar(meuPersonagem) {
   $('#valorEnergia').text(meuPersonagem.energia);
 
   // Exibir o tipo de trabalho realizado no console
-  console.log(trabalho.nome);
+  // console.log(trabalho.nome);
 
   $('#acao').text(
     meuPersonagem.nome +
@@ -689,7 +715,8 @@ function Trabalhar(meuPersonagem) {
       trabalho.nome +
       ' por ' +
       horasTrabalhadas +
-      ' horas e teve impacto em diversos atributos'
+      'horas, e impactou em :' +
+      guardarStatusAtual(meuPersonagem)
   );
 }
 
@@ -804,7 +831,35 @@ function Jogar(meuPersonagem){
       energiaAlterada: 10,
       limpezaAlterada: 0,
       dinheiroGanho: 0
+    },
+        {
+      nome: 'Fortinite',
+      saudeAlterada:  0,
+      animoAlterado: 10,
+      fomeAlterada: -3,
+      energiaAlterada: 5,
+      limpezaAlterada: -10,
+      dinheiroGanho: 0
+    },
+    {
+      nome: 'Lolzinho',
+      saudeAlterada:  -10,
+      animoAlterado: 5,
+      fomeAlterada: -5,
+      energiaAlterada: -5,
+      limpezaAlterada: -10,
+      dinheiroGanho: 0
+    },
+    {
+      nome: 'Emulador de megadrive',
+      saudeAlterada:  0,
+      animoAlterado: 20,
+      fomeAlterada: -5,
+      energiaAlterada: 5,
+      limpezaAlterada: 0,
+      dinheiroGanho: 0
     }
+
 
   ];
   let indiceJogo = Math.floor(Math.random() * tiposJogo.length);
@@ -819,13 +874,7 @@ function Jogar(meuPersonagem){
   meuPersonagem.dinheiro += jogo.dinheiroGanho;
 
   // Exibir as informações do jogo selecionado e atributos atualizados usando a função mostrar()
-  let mensagem = `Você jogou ${jogo.nome} e os atributos foram alterados.\n\n`;
-  mensagem += `Saúde: ${jogo.saudeAlterada}\n`;
-  mensagem += `Ânimo: ${jogo.animoAlterado}\n`;
-  mensagem += `Fome: ${jogo.fomeAlterada}\n`;
-  mensagem += `Energia: ${jogo.energiaAlterada}\n`;
-  mensagem += `Limpeza: ${jogo.limpezaAlterada}\n`;
-  mensagem += `Dinheiro: ${jogo.dinheiroGanho}\n`;
+  let mensagem = `Você jogou ${jogo.nome} e os atributos foram alterados. \n` + guardarStatusAtual(meuPersonagem);
   passarHora();
   $('#valorDinheiro').text(meuPersonagem.dinheiro);
   $('#valorAnimo').text(meuPersonagem.animo);
@@ -836,6 +885,46 @@ function Jogar(meuPersonagem){
 
   $('#acao').text(mensagem);
 }
+
+function guardarStatusAtual(meuPersonagem) {
+  let statusAfetados = '\n';
+
+  // Verificar e mostrar os status afetados
+  if (meuPersonagem.saude !== meuPersonagem.saudeAnterior) {
+    const alteracao = meuPersonagem.saude - meuPersonagem.saudeAnterior;
+    statusAfetados += `Saúde (${alteracao > 0 ? '+' : ''}${alteracao}) `;
+  }
+  if (meuPersonagem.animo !== meuPersonagem.animoAnterior) {
+    const alteracao = meuPersonagem.animo - meuPersonagem.animoAnterior;
+    statusAfetados += `Ânimo (${alteracao > 0 ? '+' : ''}${alteracao}) `;
+  }
+  if (meuPersonagem.fome !== meuPersonagem.fomeAnterior) {
+    const alteracao = meuPersonagem.fome - meuPersonagem.fomeAnterior;
+    statusAfetados += `Fome (${alteracao > 0 ? '+' : ''}${alteracao}) `;
+  }
+  if (meuPersonagem.energia !== meuPersonagem.energiaAnterior) {
+    const alteracao = meuPersonagem.energia - meuPersonagem.energiaAnterior;
+    statusAfetados += `Energia (${alteracao > 0 ? '+' : ''}${alteracao}) `;
+  }
+  if (meuPersonagem.limpeza !== meuPersonagem.limpezaAnterior) {
+    const alteracao = meuPersonagem.limpeza - meuPersonagem.limpezaAnterior;
+    statusAfetados += `Limpeza (${alteracao > 0 ? '+' : ''}${alteracao}) `;
+  }
+  if (meuPersonagem.dinheiro !== meuPersonagem.dinheiroAnterior) {
+    const alteracao = meuPersonagem.dinheiro - meuPersonagem.dinheiroAnterior;
+    statusAfetados += `Dinheiro (${alteracao > 0 ? '+' : ''}${alteracao}) `;
+  }
+
+  // Atualizar os status anteriores
+  meuPersonagem.saudeAnterior = meuPersonagem.saude;
+  meuPersonagem.animoAnterior = meuPersonagem.animo;
+  meuPersonagem.fomeAnterior = meuPersonagem.fome;
+  meuPersonagem.energiaAnterior = meuPersonagem.energia;
+  meuPersonagem.limpezaAnterior = meuPersonagem.limpeza;
+  meuPersonagem.dinheiroAnterior = meuPersonagem.dinheiro;
+	   return statusAfetados.trim();
+}
+
 
 
 
