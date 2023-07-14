@@ -349,6 +349,7 @@ $('#botaoEnviar').click(function() {
     mostrarAlerta("Nada acontece. Clique para continuar o jogo.");
   }
   meuPersonagem.limpeza -= getRandomInt(5, 25);
+  meuPersonagem.animo -= getRandomInt(20, 50);
     $('#valorNomeBicho').text(meuPersonagem.nome);
     $('#valorSaude').text(meuPersonagem.saude);
     $('#valorAnimo').text(meuPersonagem.animo);
@@ -475,6 +476,7 @@ function Comer(meuPersonagem) {
   $('#valorDinheiro').text(meuPersonagem.dinheiro);
   $('#valorSaude').text(meuPersonagem.saude);
   // Atualize os outros campos de status da mesma maneira
+  meuPersonagem.animo -= getRandomInt(-5, 5);
 
    $('#acao').text(meuPersonagem.nome + ' comeu '+ comida[0] + ' e bebeu ' + bebida[0] + '| Status alterados: ' + guardarStatusAtual(meuPersonagem));
 
@@ -538,7 +540,7 @@ function Dormir(meuPersonagem) {
     case 'Soneca':
       saudeAlterada = 5;
       energiaAlterada = 10;
-      animoAlterado = 5;
+      animoAlterado = 3;
       passarHora();
       passarHora();
       passarHora();
@@ -550,7 +552,7 @@ function Dormir(meuPersonagem) {
     case 'Cochilo':
       saudeAlterada = 10;
       energiaAlterada = 20;
-      animoAlterado = 10;
+      animoAlterado = -3;
       passarHora();
       passarHora();
       passarHora();
@@ -688,7 +690,7 @@ function Trabalhar(meuPersonagem) {
 
   // Atualizar os atributos do personagem com base no tipo de trabalho selecionado
   meuPersonagem.dinheiro += trabalho.dinheiroGanho;
-  meuPersonagem.animo -= getRandomInt(5, 30); // Diminui aleatoriamente o ânimo
+  meuPersonagem.animo -= getRandomInt(8, 35); // Diminui aleatoriamente o ânimo
   meuPersonagem.saude -= getRandomInt(5, 25); // Diminui aleatoriamente a saúde
   meuPersonagem.fome -= getRandomInt(10, 25); // Diminui aleatoriamente a fome
   meuPersonagem.energia -= getRandomInt(10, 35); // Diminui aleatoriamente a energia
@@ -727,7 +729,7 @@ function Jogar(meuPersonagem){
     {
       nome: 'Indie bacana',
       saudeAlterada: 3,
-      animoAlterado: 25,
+      animoAlterado: 15,
       fomeAlterada: -2,
       energiaAlterada: 4,
       limpezaAlterada: 1,
@@ -772,7 +774,7 @@ function Jogar(meuPersonagem){
     {
       nome: 'Stardew Valley',
       saudeAlterada: 5,
-      animoAlterado: 23,
+      animoAlterado: 13,
       fomeAlterada: -5,
       energiaAlterada: 5,
       limpezaAlterada: 5,
