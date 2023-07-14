@@ -480,6 +480,10 @@ function Banho(meuPersonagem) {
   meuPersonagem.animo += banho.animoRecuperado;
   meuPersonagem.fome += -5;
   meuPersonagem.energia += -5;
+  meuPersonagem.limpeza  += 25;
+
+$('#valorLimpeza').text(meuPersonagem.limpeza  );
+	
   $('#valorSaude').text(meuPersonagem.saude);
   $('#valorAnimo').text(meuPersonagem.animo);
   $('#valorEnergia').text(meuPersonagem.energia);
