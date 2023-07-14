@@ -478,6 +478,7 @@ function Comer(meuPersonagem) {
   $('#valorSaude').text(meuPersonagem.saude);
   // Atualize os outros campos de status da mesma maneira
   meuPersonagem.animo -= getRandomInt(-5, 5);
+	$('#valorAnimo').text(meuPersonagem.animo);
 
    $('#acao').text(meuPersonagem.nome + ' comeu '+ comida[0] + ' e bebeu ' + bebida[0] + '| Status alterados: ' + guardarStatusAtual(meuPersonagem));
 
