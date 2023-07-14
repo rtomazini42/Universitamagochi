@@ -1,6 +1,7 @@
 
 
     var diasNegativo = 0;
+    
 
 
         const comidas = [
@@ -349,7 +350,7 @@ $('#botaoEnviar').click(function() {
     mostrarAlerta("Nada acontece. Clique para continuar o jogo.");
   }
   meuPersonagem.limpeza -= getRandomInt(5, 25);
-  meuPersonagem.animo -= getRandomInt(20, 50);
+  meuPersonagem.animo -= getRandomInt(35, 55);
     $('#valorNomeBicho').text(meuPersonagem.nome);
     $('#valorSaude').text(meuPersonagem.saude);
     $('#valorAnimo').text(meuPersonagem.animo);
@@ -729,8 +730,8 @@ function Jogar(meuPersonagem){
     {
       nome: 'Indie bacana',
       saudeAlterada: 3,
-      animoAlterado: 15,
-      fomeAlterada: -2,
+      animoAlterado: 13,
+      fomeAlterada: -5,
       energiaAlterada: 4,
       limpezaAlterada: 1,
       dinheiroGanho: -1
@@ -739,7 +740,7 @@ function Jogar(meuPersonagem){
       nome: 'Counter Strike',
       saudeAlterada: -5,
       animoAlterado: 7,
-      fomeAlterada: -3,
+      fomeAlterada: -6,
       energiaAlterada: -7,
       limpezaAlterada: -3,
       dinheiroGanho: -5
@@ -757,7 +758,7 @@ function Jogar(meuPersonagem){
       nome: 'Yugioh MasterDuel',
       saudeAlterada: 0,
       animoAlterado: 12,
-      fomeAlterada: 1,
+      fomeAlterada: -6,
       energiaAlterada: 3,
       limpezaAlterada: 0,
       dinheiroGanho: -11
@@ -766,15 +767,15 @@ function Jogar(meuPersonagem){
       nome: 'Tetris',
       saudeAlterada: 5,
       animoAlterado: 10,
-      fomeAlterada: 3,
-      energiaAlterada: 10,
+      fomeAlterada: -6,
+      energiaAlterada: -5,
       limpezaAlterada: 5,
       dinheiroGanho: 0
     },
     {
       nome: 'Stardew Valley',
       saudeAlterada: 5,
-      animoAlterado: 13,
+      animoAlterado: 11,
       fomeAlterada: -5,
       energiaAlterada: 5,
       limpezaAlterada: 5,
@@ -785,14 +786,14 @@ function Jogar(meuPersonagem){
       saudeAlterada: 5,
       animoAlterado: 25,
       fomeAlterada: -5,
-      energiaAlterada: 5,
+      energiaAlterada: -3,
       limpezaAlterada: 0,
       dinheiroGanho: 0
     },
     {
       nome: 'Guitar hero',
       saudeAlterada: 3,
-      animoAlterado: 15,
+      animoAlterado: 13,
       fomeAlterada: -15,
       energiaAlterada: -15,
       limpezaAlterada: -11,
@@ -812,14 +813,14 @@ function Jogar(meuPersonagem){
       saudeAlterada: 0,
       animoAlterado: 13,
       fomeAlterada: 0,
-      energiaAlterada: 30,
+      energiaAlterada: -3,
       limpezaAlterada: -5,
       dinheiroGanho: 0
     },
     {
       nome: 'Emulador de GBA',
       saudeAlterada: 0,
-      animoAlterado: 13,
+      animoAlterado: 11,
       fomeAlterada: -3,
       energiaAlterada: 10,
       limpezaAlterada: 0,
@@ -857,8 +858,8 @@ function Jogar(meuPersonagem){
       saudeAlterada:  0,
       animoAlterado: 20,
       fomeAlterada: -5,
-      energiaAlterada: 5,
-      limpezaAlterada: 0,
+      energiaAlterada: -5,
+      limpezaAlterada: -2,
       dinheiroGanho: 0
     }
 
@@ -876,8 +877,8 @@ function Jogar(meuPersonagem){
   meuPersonagem.dinheiro += jogo.dinheiroGanho;
 
   // Exibir as informações do jogo selecionado e atributos atualizados usando a função mostrar()
+   passarHora();
   let mensagem = `Você jogou ${jogo.nome} e os atributos foram alterados. \n` + guardarStatusAtual(meuPersonagem);
-  passarHora();
   $('#valorDinheiro').text(meuPersonagem.dinheiro);
   $('#valorAnimo').text(meuPersonagem.animo);
   $('#valorSaude').text(meuPersonagem.saude);
