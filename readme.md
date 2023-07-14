@@ -8,7 +8,8 @@ O Universitamagochi é um simulador de universitário no qual você assume o pap
 
 O jogo é projetado para funcionar melhor em PCs e tablets, ou em telas horizontais, para proporcionar a melhor experiência de jogo possível.
 
-![Logos](img/icon/logo_renan.png) ![Logos](img/icon/logo_game.png)
+![Logos](img/icon/logo_renan.png | width=100) ![Logos](img/icon/logo_game.png | width=100)
+
 
 ## Recursos futuros
 
