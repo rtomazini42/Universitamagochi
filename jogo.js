@@ -478,8 +478,12 @@ function Banho(meuPersonagem) {
   // Atualizar os atributos do personagem com base no tipo de banho selecionado
   meuPersonagem.saude += banho.saudeRecuperada;
   meuPersonagem.animo += banho.animoRecuperado;
+  meuPersonagem.fome += -5;
+  meuPersonagem.energia += -5;
   $('#valorSaude').text(meuPersonagem.saude);
   $('#valorAnimo').text(meuPersonagem.animo);
+  $('#valorEnergia').text(meuPersonagem.energia);
+  $('#valorFome').text(meuPersonagem.fome);
 
   // Exibir os atributos atualizados no HTML
   // $('#valorSaude').text(meuPersonagem.saude);
