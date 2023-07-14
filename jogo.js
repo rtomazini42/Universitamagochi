@@ -494,21 +494,25 @@ function Banho(meuPersonagem) {
   $('#cenario').append('<img id="cenarioImg" src="img/Scene/BedRoom.png" class="mx-auto img-fluid">');
   let indiceBanho = Math.floor(Math.random() * 5); // 5 opções diferentes de banho
   let tiposBanho = [
-    { nome: 'Banho de Chuveiro', saudeRecuperada: 10, animoRecuperado: 5 },
-    { nome: 'Banheira de Espuma', saudeRecuperada: 15, animoRecuperado: 10 },
+    { nome: 'Banho de Chuveiro', saudeRecuperada: 10, animoRecuperado: 3 },
+    { nome: 'Banho de Chuveiro', saudeRecuperada: 11, animoRecuperado: 4 },
+ { nome: 'Banho de Chuveiro', saudeRecuperada: 12, animoRecuperado: 7 },
+ { nome: 'Banho de Chuveiro', saudeRecuperada: 14, animoRecuperado: 1 },
+ { nome: 'Banho de Chuveiro', saudeRecuperada: 9, animoRecuperado: 5 },
+    { nome: 'Banheira de Espuma', saudeRecuperada: 15, animoRecuperado: 5 },
     { nome: 'Banho de Aromaterapia', saudeRecuperada: 20, animoRecuperado: 15 },
-    { nome: 'Banho de Cascata', saudeRecuperada: 25, animoRecuperado: 20 },
-    { nome: 'Banho de nervoso', saudeRecuperada: 35, animoRecuperado: 30 },
-    { nome: 'Banho de Sauna', saudeRecuperada: 30, animoRecuperado: 25 }
+    { nome: 'Banho de Cascata', saudeRecuperada: 25, animoRecuperado: 6 },
+    { nome: 'Banho de nervoso', saudeRecuperada: 35, animoRecuperado: 12 },
+    { nome: 'Banho de Sauna', saudeRecuperada: 30, animoRecuperado: 2 }
   ];
   let banho = tiposBanho[indiceBanho];
 
   // Atualizar os atributos do personagem com base no tipo de banho selecionado
   meuPersonagem.saude += banho.saudeRecuperada;
   meuPersonagem.animo += banho.animoRecuperado;
-  meuPersonagem.fome += -5;
-  meuPersonagem.energia += -5;
-  meuPersonagem.limpeza  += 25;
+  meuPersonagem.fome += -8;
+  meuPersonagem.energia += -6;
+  meuPersonagem.limpeza  += 26;
 
 $('#valorLimpeza').text(meuPersonagem.limpeza  );
 	
@@ -854,7 +858,7 @@ function Jogar(meuPersonagem){
       animoAlterado: 5,
       fomeAlterada: -5,
       energiaAlterada: -5,
-      limpezaAlterada: -10,
+      limpezaAlterada: -32,
       dinheiroGanho: -12
     },
     {
