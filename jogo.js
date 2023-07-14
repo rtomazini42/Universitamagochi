@@ -350,7 +350,7 @@ $('#botaoEnviar').click(function() {
     mostrarAlerta("Nada acontece. Clique para continuar o jogo.");
   }
   meuPersonagem.limpeza -= getRandomInt(5, 25);
-  meuPersonagem.animo -= getRandomInt(10, 30);
+  meuPersonagem.animo -= getRandomInt(3, 30);
     $('#valorNomeBicho').text(meuPersonagem.nome);
     $('#valorSaude').text(meuPersonagem.saude);
     $('#valorAnimo').text(meuPersonagem.animo);
