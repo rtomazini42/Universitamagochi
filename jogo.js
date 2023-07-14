@@ -605,7 +605,10 @@ function Estudar(meuPersonagem) {
     { nome: 'Foi para Aula', animoAlterado: -5, saudeAlterada: -5, fomeAlterada: -10, energiaAlterada: -10, dinheiroAlterado: true, limpezaAlterada: -5 },
     { nome: 'Asistindo video Aulas', animoAlterado: 0, saudeAlterada: -5, fomeAlterada: -5, energiaAlterada: -10 },
     { nome: 'Estudando Bravamente', animoAlterado: 10, saudeAlterada: -10, fomeAlterada: -15, energiaAlterada: -15 },
-    { nome: 'Matando aula para estudae', animoAlterado: 15, saudeAlterada: -3, fomeAlterada: -3, energiaAlterada: -5 }
+    { nome: 'Estudando Triste', animoAlterado: -5, saudeAlterada: -5, fomeAlterada: -5, energiaAlterada: -5 },
+	{ nome: 'Estudando em pomodoro', animoAlterado: 3, saudeAlterada: -3, fomeAlterada: -12, energiaAlterada: -4 },
+	{ nome: 'Estudando pelos slides', animoAlterado: -12, saudeAlterada: -10, fomeAlterada: -15, energiaAlterada: -15 },
+    { nome: 'Matando aula para estudar', animoAlterado: 15, saudeAlterada: -3, fomeAlterada: -3, energiaAlterada: -5 }
 
   ];
   let indiceEstudo = Math.floor(Math.random() * opcoesEstudo.length);
