@@ -726,7 +726,7 @@ function Jogar(meuPersonagem){
   let tiposJogo = [
     {
       nome: 'Indie bacana',
-      saudeAlterada: 10,
+      saudeAlterada: 3,
       animoAlterado: 25,
       fomeAlterada: -2,
       energiaAlterada: 4,
@@ -736,29 +736,29 @@ function Jogar(meuPersonagem){
     {
       nome: 'Counter Strike',
       saudeAlterada: -5,
-      animoAlterado: 12,
+      animoAlterado: 7,
       fomeAlterada: -3,
-      energiaAlterada: -3,
+      energiaAlterada: -7,
       limpezaAlterada: -3,
-      dinheiroGanho: -2
+      dinheiroGanho: -5
     },
     {
       nome: 'The sims',
       saudeAlterada: 0,
       animoAlterado: 3,
-      fomeAlterada: 3,
-      energiaAlterada: 3,
+      fomeAlterada: -3,
+      energiaAlterada: -3,
       limpezaAlterada: 0,
       dinheiroGanho: 0
     },
     {
       nome: 'Yugioh MasterDuel',
       saudeAlterada: 0,
-      animoAlterado: 30,
+      animoAlterado: 12,
       fomeAlterada: 1,
       energiaAlterada: 3,
       limpezaAlterada: 0,
-      dinheiroGanho: -4
+      dinheiroGanho: -11
     },
     {
       nome: 'Tetris',
@@ -772,9 +772,9 @@ function Jogar(meuPersonagem){
     {
       nome: 'Stardew Valley',
       saudeAlterada: 5,
-      animoAlterado: 30,
-      fomeAlterada: 5,
-      energiaAlterada: 15,
+      animoAlterado: 23,
+      fomeAlterada: -5,
+      energiaAlterada: 5,
       limpezaAlterada: 5,
       dinheiroGanho: 0
     },
@@ -782,24 +782,24 @@ function Jogar(meuPersonagem){
       nome: 'Telethugs',
       saudeAlterada: 5,
       animoAlterado: 25,
-      fomeAlterada: 5,
+      fomeAlterada: -5,
       energiaAlterada: 5,
       limpezaAlterada: 0,
       dinheiroGanho: 0
     },
     {
       nome: 'Guitar hero',
-      saudeAlterada: 15,
-      animoAlterado: 30,
-      fomeAlterada: -10,
-      energiaAlterada: -10,
-      limpezaAlterada: -5,
+      saudeAlterada: 3,
+      animoAlterado: 15,
+      fomeAlterada: -15,
+      energiaAlterada: -15,
+      limpezaAlterada: -11,
       dinheiroGanho: 0
     },
     {
       nome: 'Disco Elysium',
       saudeAlterada: -5,
-      animoAlterado: 50,
+      animoAlterado: 25,
       fomeAlterada: 5,
       energiaAlterada: 15,
       limpezaAlterada: 0,
@@ -808,17 +808,17 @@ function Jogar(meuPersonagem){
     {
       nome: 'Emulador de PSONE',
       saudeAlterada: 0,
-      animoAlterado: 30,
+      animoAlterado: 13,
       fomeAlterada: 0,
       energiaAlterada: 30,
-      limpezaAlterada: 0,
+      limpezaAlterada: -5,
       dinheiroGanho: 0
     },
     {
       nome: 'Emulador de GBA',
       saudeAlterada: 0,
-      animoAlterado: 25,
-      fomeAlterada: 3,
+      animoAlterado: 13,
+      fomeAlterada: -3,
       energiaAlterada: 10,
       limpezaAlterada: 0,
       dinheiroGanho: 0
@@ -826,18 +826,18 @@ function Jogar(meuPersonagem){
     {
       nome: 'Naruto Ninja Storm',
       saudeAlterada:  0,
-      animoAlterado: 20,
-      fomeAlterada: 5,
-      energiaAlterada: 10,
+      animoAlterado: 11,
+      fomeAlterada: -5,
+      energiaAlterada: -5,
       limpezaAlterada: 0,
       dinheiroGanho: 0
     },
         {
       nome: 'Fortinite',
       saudeAlterada:  0,
-      animoAlterado: 10,
+      animoAlterado: 5,
       fomeAlterada: -3,
-      energiaAlterada: 5,
+      energiaAlterada: -5,
       limpezaAlterada: -10,
       dinheiroGanho: 0
     },
@@ -848,7 +848,7 @@ function Jogar(meuPersonagem){
       fomeAlterada: -5,
       energiaAlterada: -5,
       limpezaAlterada: -10,
-      dinheiroGanho: 0
+      dinheiroGanho: -12
     },
     {
       nome: 'Emulador de megadrive',
