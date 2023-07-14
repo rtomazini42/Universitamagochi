@@ -669,7 +669,7 @@ function Trabalhar(meuPersonagem) {
     { nome: 'Estágio', dinheiroGanho: 100, horasTrabalhadas: 8 },
     { nome: 'Trabalho efetivo', dinheiroGanho: 200, horasTrabalhadas: 10 },
     { nome: 'Seu time ganhou na betNacional', dinheiroGanho: 100, horasTrabalhadas: 1 },
-    { nome: 'Seu time perdeu na betNacional', dinheiroGanho: -250, horasTrabalhadas: 1 },
+    { nome: 'Seu time perdeu na betNacional', dinheiroGanho: -110, horasTrabalhadas: 1 },
     { nome: 'Criar jogo mobile', dinheiroGanho: 30, horasTrabalhadas: 8 },
     { nome: 'Criar site de instituição', dinheiroGanho: 30, horasTrabalhadas: 8 },
     { nome: 'Show de palhaço para criançada', dinheiroGanho: 15, horasTrabalhadas: 2 },
